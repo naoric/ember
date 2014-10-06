@@ -1,0 +1,1 @@
+window.Youtube = Em.Application.create();

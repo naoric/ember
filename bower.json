@@ -1,0 +1,26 @@
+{
+  "name": "youtube-simple",
+  "version": "0.0.1",
+  "authors": [
+    "Naor Ami <naoric@gmail.com>"
+  ],
+  "description": "youtube",
+  "main": "index.html",
+  "keywords": [
+    "youtube"
+  ],
+  "license": "MIT",
+  "homepage": "http://home.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "ember": "~1.7.0",
+    "ember-data": "~1.0.0-beta.10"
+  }
+}
