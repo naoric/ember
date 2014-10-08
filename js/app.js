@@ -1,1 +1,3 @@
-window.Youtube = Em.Application.create();
+window.Youtube = Em.Application.create({
+	LOG_TRANSITIONS: true
+});

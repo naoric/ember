@@ -1,9 +1,10 @@
 Youtube.SearchController = Em.ArrayController.extend({
 	searchResults: [],
-	actions: {
+	queryParams:   ['term'],
+	actions:       {
 		search: function() {
 			var term = this.get('term');
-			this.set('searchResults', Youtube.VideoSearch.search(term));
+			this.set('searchResults', Youtube.Video.search(term));
 		}
 	}
 });

@@ -4,19 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></head>
-	<body>
-		<script type="text/x-handlebars">
+	<body>		
+		<script type="text/x-handlebars" data-template-name="app">
 			<div class="container-fluid">
 				<div class="row clearfix">
 					<div class="col-md-4 column">
-						{{!-- video-list --}}
+						{{outlet playlist}}
 					</div>
 					<div class="col-md-8 column">
 						<ul class="nav nav-pills">
 							
-							{{#link-to "video" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
-						
-							{{#link-to "search" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Search</a>{{/link-to}}
+							{{#link-to "app.video" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
+
+							{{#link-to "app.search" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Search</a>{{/link-to}}
 							
 						</ul>
 						{{!-- video / search--}}
@@ -25,34 +25,39 @@
 				</div>
 			</div>
 		</script>
-
-		<script type="text/x-handlebars" data-template-name="video-list">
-			{{#each}}
+		<script type="text/x-handlebars" data-template-name="playlist">
 			<div class="row clearfix">
-				<a href="#" class="btn btn-default">
+				<div class="col-md-6">
+					<a class="btn btn-danger" {{action 'clear'}}>X Clear</a>
+				</div>
+				
+			</div>
+			{{#each videos itemController="playlistVideo"}}
+			<div class="row clearfix">
 					<div class="col-md-4 column">
-						<img alt="140x140" src="http://lorempixel.com/150/150/" class="img-thumbnail" />
+						<a href="#">
+							<img alt="140x140" {{bind-attr src=thumbnail}} class="img-thumbnail" />
+						</a>
 					</div>
 					<div class="col-md-8 column">
-						<h4>Video Title</h4>
-						<p>sdflkj sdlfkj dslkfj sdlkfj dslkfj</p>
+						<div class="row clearfix">
+							<div class="col-md-10">
+								<h4>{{title}}</h4>
+							</div>
+							<div class="col-md-2">
+								<a class="btn btn-danger" {{action 'remove'}}>X</a>
+							</div>
+						</div>	
+						<p>{{description}}</p>		
 					</div>
-				</a>
 			</div>
 			{{/each}}
 		</script>
-		<script type="text/x-handlebars" data-template-name="video">
+		<script type="text/x-handlebars" data-template-name="app/video">
 			<div class="row clearfix">
 				<div class="col-md-8 col-md-offset-2 column">
-					<div class="jumbotron">
-						<h1>Hello, world!</h1>
-						<p>
-							This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-						</p>
-						<p>
-							<a class="btn btn-primary btn-large" href="#">Learn more</a>
-						</p>
-					</div>
+					<iframe id="ytplayer" type="text/html" width="640" height="390"
+						{{bind-attr src=videoSrc}} frameborder="0"/>
 				</div>
 			</div>
 			<div class="row clearfix">
@@ -76,7 +81,7 @@
 				</div>
 			</div>
 		</script>
-		<script type="text/x-handlebars" data-template-name="search">
+		<script type="text/x-handlebars" data-template-name="app/search">
 			<div class="row clearfix">
 				<div class="col-md-8 column">
 					<form class="navbar-form navbar-left" role="search">
@@ -91,7 +96,7 @@
 				</div>
 			</div>
 			{{log searchResults}}
-			{{#each searchResults.searchResults}}
+			{{#each searchResults.searchResults itemController="video"}}
 			<div class="row clearfix">
 				<div class="col-md-2 column">
 					<img alt="140x140" class="img-thumbnail" {{bind-attr src=thumbnail}} />
@@ -105,11 +110,10 @@
 					</p>
 				</div>
 				<div class="col-md-2 column">
-					<button type="button" class="btn btn-default">Add</button>
+					<button type="button" class="btn btn-primary" {{action 'addToPlaylist'}}>Add</button>
 				</div>
 			</div>
 			{{/each}}
-		
 		</script>
 
 		<script src="lib/jquery/dist/jquery.min.js"></script>
@@ -121,5 +125,8 @@
 		<script src="js/router.js"></script>
 		<script src="js/models/video-search.js"></script>
 		<script src="js/controllers/search-controller.js"></script>
+		<script src="js/controllers/video-controller.js"></script>
+		<script src="js/controllers/playlist-controller.js"></script>
+		<script src="js/controllers/playlist-video-controller.js"></script>
 	</body>
 	</html>
