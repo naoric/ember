@@ -1,0 +1,15 @@
+{
+  "name": "ember-bootstrap",
+  "homepage": "https://github.com/emberjs-addons/ember-bootstrap",
+  "version": "0.0.2",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "44780487d582a5e982114dd0be4f9c306d4f7269"
+  },
+  "_source": "git://github.com/emberjs-addons/ember-bootstrap.git",
+  "_target": "~0.0.2",
+  "_originalSource": "ember-bootstrap",
+  "_direct": true
+}

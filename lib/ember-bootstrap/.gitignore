@@ -1,0 +1,8 @@
+.bundle
+dist/
+tmp/
+tests/source/
+tests/ember-bootstrap-tests.js
+.DS_Store
+.github-upload-token
+*.gem
