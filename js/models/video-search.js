@@ -23,11 +23,11 @@ Youtube.Video.reopenClass({
             var i, item;
             for (i = response.items.length - 1; i >= 0; i--) {
                 item = {
-                    id: response.items[i].id.videoId,
-                    thumbnail: response.items[i].snippet.thumbnails.
-                    default.url,
+                    id:          response.items[i].id.videoId,
+                    thumbnail:   response.items[i].snippet.thumbnails.default.url,
+                    url:         'http://www.youtube.com/embed/' + response.items[i].id.videoId,
                     description: response.items[i].snippet.description,
-                    title: response.items[i].snippet.title
+                    title:       response.items[i].snippet.title
                 }
                 results.push(item);
             }

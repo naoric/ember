@@ -3,130 +3,133 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></head>
-	<body>		
-		<script type="text/x-handlebars" data-template-name="app">
-			<div class="container-fluid">
-				<div class="row clearfix">
-					<div class="col-md-4 column">
-						{{outlet playlist}}
-					</div>
-					<div class="col-md-8 column">
-						<ul class="nav nav-pills">
-							
-							{{#link-to "app.video" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
-
-							{{#link-to "app.search" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Search</a>{{/link-to}}
-							
-						</ul>
-						{{!-- video / search--}}
-						{{outlet}}
-					</div>
-				</div>
-			</div>
-		</script>
-		<script type="text/x-handlebars" data-template-name="playlist">
+	<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>		
+	<script type="text/x-handlebars" data-template-name="app">
+		{{view Youtube.NotificationView id="notifications" notificationBinding="notification" class="notification" }}
+		<div class="container-fluid">
 			<div class="row clearfix">
-				<div class="col-md-6">
-					<a class="btn btn-danger" {{action 'clear'}}>X Clear</a>
-				</div>
-				
-			</div>
-			{{#each videos itemController="playlistVideo"}}
-			<div class="row clearfix">
-					<div class="col-md-4 column">
-						<a href="#">
-							<img alt="140x140" {{bind-attr src=thumbnail}} class="img-thumbnail" />
-						</a>
-					</div>
-					<div class="col-md-8 column">
-						<div class="row clearfix">
-							<div class="col-md-10">
-								<h4>{{title}}</h4>
-							</div>
-							<div class="col-md-2">
-								<a class="btn btn-danger" {{action 'remove'}}>X</a>
-							</div>
-						</div>	
-						<p>{{description}}</p>		
-					</div>
-			</div>
-			{{/each}}
-		</script>
-		<script type="text/x-handlebars" data-template-name="app/video">
-			<div class="row clearfix">
-				<div class="col-md-8 col-md-offset-2 column">
-					<iframe id="ytplayer" type="text/html" width="640" height="390"
-						{{bind-attr src=videoSrc}} frameborder="0"/>
-				</div>
-			</div>
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<h3 class="text-primary">h3. Lorem ipsum dolor sit amet.</h3>
-					<p>
-						Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
-					</p>
-					<div class="media well">
-						<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
-						<div class="media-body">
-							<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-							<div class="media">
-								<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
-								<div class="media-body">
-									<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</script>
-		<script type="text/x-handlebars" data-template-name="app/search">
-			<div class="row clearfix">
-				<div class="col-md-8 column">
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							
-							{{input type="text" value=term}}
-						</div>
-						<button {{action 'search'}} class="btn btn-default">Search</button>
-					</form>
-				</div>
 				<div class="col-md-4 column">
-				</div>
-			</div>
-			{{log searchResults}}
-			{{#each searchResults.searchResults itemController="video"}}
-			<div class="row clearfix">
-				<div class="col-md-2 column">
-					<img alt="140x140" class="img-thumbnail" {{bind-attr src=thumbnail}} />
+					{{outlet playlist}}
 				</div>
 				<div class="col-md-8 column">
-					<h2>
-						{{title}}
-					</h2>
-					<p>
-						{{description}}
-					</p>
-				</div>
-				<div class="col-md-2 column">
-					<button type="button" class="btn btn-primary" {{action 'addToPlaylist'}}>Add</button>
+					<ul class="nav nav-pills">
+
+						{{#link-to "app.video" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Home</a>{{/link-to}}
+
+						{{#link-to "app.search" tagName="li" href=false}}<a {{bind-attr href="view.href"}}>Search</a>{{/link-to}}
+
+					</ul>
+					{{outlet}}
 				</div>
 			</div>
-			{{/each}}
-		</script>
+		</div>
+	</script>
+	<script type="text/x-handlebars" data-template-name="playlist">
+		<div class="row clearfix">
+			<div class="col-md-6">
+				<a class="btn btn-danger" {{action 'clear'}}>X Clear</a>
+			</div>
 
-		<script src="lib/jquery/dist/jquery.min.js"></script>
-		<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="lib/handlebars/handlebars.min.js"></script>
-		<script src="lib/ember/ember.min.js"></script>
-		<script src="lib/ember-data/ember-data.min.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/router.js"></script>
-		<script src="js/models/video-search.js"></script>
-		<script src="js/controllers/search-controller.js"></script>
-		<script src="js/controllers/video-controller.js"></script>
-		<script src="js/controllers/playlist-controller.js"></script>
-		<script src="js/controllers/playlist-video-controller.js"></script>
-	</body>
-	</html>
+		</div>
+		{{#each videos itemController="playlistVideo"}}
+		<div class="row clearfix playlist-item" {{action 'play'}}>
+			<div class="col-md-4 column">
+				<img alt="140x140" {{bind-attr src=thumbnail}} class="img-thumbnail" />
+			</div>
+			<div class="col-md-8 column">
+				<div class="row clearfix">
+					<div class="col-md-10">
+						<h4>{{title}}</h4>
+					</div>
+					<div class="col-md-2">
+						<a class="btn btn-danger" {{action 'remove'}}>X</a>
+					</div>
+				</div>	
+				<p>{{description}}</p>		
+			</div>
+		</div>
+		{{/each}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="app/video">
+		<div class="row clearfix">
+			<div class="col-md-8 col-md-offset-2 column">
+				<iframe id="ytplayer" type="text/html" width="640" height="390" {{bind-attr src=video.url}} frameborder="0">
+				</iframe>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<h3 class="text-primary">h3. Lorem ipsum dolor sit amet.</h3>
+				<p>
+					Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+				</p>
+				<div class="media well">
+					<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
+					<div class="media-body">
+						<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+						<div class="media">
+							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
+							<div class="media-body">
+								<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script type="text/x-handlebars" data-template-name="app/search">
+		<div class="row clearfix">
+			<div class="col-md-8 column">
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+
+						{{input type="text" value=term}}
+					</div>
+					<button {{action 'search'}} class="btn btn-default">Search</button>
+				</form>
+			</div>
+			<div class="col-md-4 column">
+			</div>
+		</div>
+
+		{{#each searchResults.searchResults itemController="searchVideo"}}
+		<div class="row clearfix">
+			<div class="col-md-2 column">
+				<img alt="140x140" class="img-thumbnail" {{bind-attr src=thumbnail}} />
+			</div>
+			<div class="col-md-8 column">
+				<h2>
+					{{title}}
+				</h2>
+				<p>
+					{{description}}
+				</p>
+			</div>
+			<div class="col-md-2 column">
+				<button type="button" class="btn btn-primary" {{action 'addToPlaylist'}}>Add</button>
+			</div>
+		</div>
+		{{/each}}
+	</script>
+
+	<script src="lib/jquery/dist/jquery.min.js"></script>
+	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="lib/handlebars/handlebars.min.js"></script>
+	<script src="lib/ember/ember.min.js"></script>
+	<script src="lib/ember-data/ember-data.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/router.js"></script>
+	<script src="js/models/video-search.js"></script>
+	<script src="js/controllers/app-controller.js"></script>
+	<script src="js/controllers/search-controller.js"></script>
+	<script src="js/controllers/video-controller.js"></script>
+	<script src="js/controllers/playlist-controller.js"></script>
+	<script src="js/controllers/playlist-video-controller.js"></script>
+	<script src="js/controllers/search-video-controller.js"></script>
+	<script src="js/views/notification-view.js"></script>
+</body>
+</html>

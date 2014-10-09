@@ -1,14 +1,14 @@
 Youtube.Router.map(function () {
 	this.resource('app', function () {
-		this.route('video', { path: 'video/:video_id' });
+		this.route('video');
 		this.route('search');
 	});
 });
 
 
-Youtube.VideoIndexRoute = Ember.Route.extend({
+Youtube.AppVideoIndexRoute = Ember.Route.extend({
 	redirect: function () {
-		this.transitionTo('video.23');
+		this.transitionTo('video/23');
 	}
 });
 

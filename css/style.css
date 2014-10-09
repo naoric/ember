@@ -1,3 +1,26 @@
 p {
 	word-wrap: break-word;
 }
+
+.playlist-item {
+	cursor: pointer;
+}
+
+.playlist-item:hover {
+	background-color: #DAE3EB;
+}
+
+.playlist-item:active {
+	background-color: #ABC2D3;
+}
+
+.notification {
+	z-index: 1000;
+	display: none;
+	background-color: #B5F18F;
+	padding: 10px;
+	position: fixed;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
