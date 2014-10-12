@@ -32,6 +32,9 @@ Youtube.AppRoute = Ember.Route.extend({
 			into: 'app',
 			outlet: 'playlist'
 		});
+	},
+	setupController: function (controller, model) {
+		this.controllerFor('playlist').send('load');
 	}
 });
 

@@ -6,7 +6,11 @@
 	<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 </head>
-<body>		
+<body>
+
+
+	<!-- templates-->
+	<!-- main template -->
 	<script type="text/x-handlebars" data-template-name="app">
 		{{view Youtube.NotificationView id="notifications" notificationBinding="notification" class="notification" }}
 		<div class="container-fluid">
@@ -27,12 +31,19 @@
 			</div>
 		</div>
 	</script>
+	<!-- /main template -->
+	<!--playlist-->
 	<script type="text/x-handlebars" data-template-name="playlist">
 		<div class="row clearfix">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<a class="btn btn-danger" {{action 'clear'}}>X Clear</a>
 			</div>
-
+			<div class="col-md-4">
+				<a class="btn btn-primary" {{action 'save'}}>Save</a>
+			</div>
+			<div class="col-md-4">
+				<a class="btn btn-primary" {{action 'load'}}>Load</a>
+			</div>
 		</div>
 		{{#each videos itemController="playlistVideo"}}
 		<div class="row clearfix playlist-item" {{action 'play'}}>
@@ -47,40 +58,19 @@
 					<div class="col-md-2">
 						<a class="btn btn-danger" {{action 'remove'}}>X</a>
 					</div>
-				</div>	
-				<p>{{description}}</p>		
+				</div>
+				<p>{{description}}</p>
 			</div>
 		</div>
 		{{/each}}
 	</script>
+	<!--/playlist-->
+	<!--single video-->
 	<script type="text/x-handlebars" data-template-name="app/video">
-		<div class="row clearfix">
-			<div class="col-md-8 col-md-offset-2 column">
-				<iframe id="ytplayer" type="text/html" width="640" height="390" {{bind-attr src=video.url}} frameborder="0">
-				</iframe>
-			</div>
-		</div>
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<h3 class="text-primary">h3. Lorem ipsum dolor sit amet.</h3>
-				<p>
-					Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
-				</p>
-				<div class="media well">
-					<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
-					<div class="media-body">
-						<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-						<div class="media">
-							<a href="#" class="pull-left"><img src="http://lorempixel.com/64/64/" class="media-object" alt='' /></a>
-							<div class="media-body">
-								<h4 class="media-heading">Nested media heading</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{{youtube-embed video=video}}
 	</script>
+	<!--/single video-->
+	<!--search page-->
 	<script type="text/x-handlebars" data-template-name="app/search">
 		<div class="row clearfix">
 			<div class="col-md-8 column">
@@ -115,6 +105,30 @@
 		</div>
 		{{/each}}
 	</script>
+	<!--/search page-->
+	<!-- /templates -->
+
+	<!-- components -->
+	<!-- youtube-embed -->
+	<script type="text/x-handlebars" id="components/youtube-embed">
+		<div class="row clearfix">
+			<div class="col-md-8 col-md-offset-2 column">
+				<iframe id="ytplayer" type="text/html" width="640" height="390" {{bind-attr src=video.url}} frameborder="0">
+				</iframe>
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+			<h3 class="text-primary">{{video.title}}</h3>
+				<p>
+					{{video.description}}
+				</p>
+			</div>
+		</div>
+	</script>
+	<!--/youtube-embed-->
+
+	<!--/components-->
 
 	<script src="lib/jquery/dist/jquery.min.js"></script>
 	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>

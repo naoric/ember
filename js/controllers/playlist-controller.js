@@ -14,6 +14,14 @@ Youtube.PlaylistController = Ember.ArrayController.extend({
 			this.set('currentId', 0);
 			this.set('videos', []);
 		},
+		save: function () {
+			localStorage['playlist'] = JSON.stringify(this.get('videos'));
+		},
+		load: function () {
+			if (typeof localStorage['playlist'] !== 'undefined') {
+				this.set('videos', JSON.parse(localStorage['playlist']));
+			}
+		},
 		remove: function (prop, value) {
 			var item = this.get('videos').findProperty(prop, value);
 			this.get('videos').removeObject(item);
